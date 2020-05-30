@@ -8,12 +8,12 @@ const defaultTextValues = ['IS', 'IS NOT'];
 const defaultValue = true;
 
 const Toggle = ({ textItems = [...defaultTextValues], value = defaultValue }) => {
-    const [ isActive, setValue ] = useState(value);
+    const [ isActive, setActive ] = useState(value);
 
     const getClassNames = () => {
         return {
             component: `${baseClassName}`,
-            componentActive: `${baseClassName}--active`,
+            componentActive: `${baseClassName} active`,
             label: `${baseClassName}__label`,
             labels: `${baseClassName}__labels`,
             selection: `${baseClassName}__selection`,
@@ -37,11 +37,11 @@ const Toggle = ({ textItems = [...defaultTextValues], value = defaultValue }) =>
             </div>
             <button
                 className={classNames.button}
-                onClick={() => setValue(!isActive)}
+                onClick={() => setActive(!isActive)}
             />
             <span className={classNames.selection}/>
         </div>
-    )
+    );
 };
 
 export default Toggle;
