@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+
+.toggle {
+    $self: &;
+
+    @mixin toggle {
+        min-width: 300px;
+        border-radius: 18px;
+        position: relative;
+        background-color: #FFFFFF;
+
+        &:hover {
+            box-shadow: 0 0 3px 1px rgba(0, 0, 255, .2);
+        }
+    }
+
+    @include toggle;
+
+    &--active {
+        @include toggle;
+        min-width: 300px;
+        border-radius: 18px;
+        position: relative;
+        background-color: #FFFFFF;
+
+        #{$self}__button {
+            left: 50%;
+        }
+
+        #{$self}__selection {
+            left: 0;
+            background-color: #E4F3E8;
+            animation: pulse-selected 1s 0.4s 1 ease-out;
+        }
+    }
+
+    &__labels {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        position: relative;
+        z-index: 1;
+        height: 36px;
+    }
+
+    &__label {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 12px;
+        white-space: nowrap;
+
+        &:nth-child(1) {
+            color: #1CB848;
+        }
+
+        &:nth-child(2) {
+            color: #F27F9B;
+        }
+    }
+
+    &__selection {
+        position: absolute;
+        width: 50%;
+        height: 36px;
+        border-radius: 18px;
+        left: 50%;
+        top: 0;
+        border: 2px solid #FFFFFF;
+        background-color: #FCE2E8;
+        transition: 0.4s ease-out;
+        animation: pulse 1s 0.4s 1 ease-out;
+    }
+
+    &__button {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+        border: 1px solid #E5E5E5;
+        border-radius: 18px;
+    }
+
+    @mixin pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+        }
+
+        100% {
+            box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+        }
+    }
+
+    @keyframes pulse {
+        @include pulse;
+    }
+
+    @keyframes pulse-selected {
+        @include pulse;
+    }
+}
